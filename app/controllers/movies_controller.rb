@@ -38,23 +38,16 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
-  def show_by_director
-    @movie = Movie.find(params[:id])
-    begin
-      @movies = Movie.others_by_same_director(id)
-    rescue StandardError => e
-      flash[:warning] = "'#{@movie.title}' empty director field"
+  def by_director
+    director = params[:director]
+    @movie = Movie.find(director)
+    if @movie.director.nil? ||  @movie.director.empty?
+      flash[:warning] = "'#{@movie.title}' has no director info"
       redirect_to movies_path
+    else
+      @movies = Movie.where(director: @movie.director)
     end
   end
-
-  #   if @movie.director.nil? ||  @movie.director.empty?
-      
-  #     redirect_to movies_path
-  #   else
-  #     @movies = Movie.where(director: @movie.director).where.not(id: @movie.id)
-  #   end
-  # end
 
   private
   # Making "internal" methods private is not required, but is a common practice.

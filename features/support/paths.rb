@@ -19,10 +19,7 @@ module NavigationHelpers
     when /the details page for "(.*)"$/
       then movie_path(Movie.where("title=?",$1).first)
     when /the Similar Movies page for "(.*)"$/
-      # then show_by_director_path(Movie.where("title =?",$1).first)
-      # then match '/movies/:id/show_by_director', :to => 'movies#show_by_director', :as => :show_by_director
-      movie = Movie.others_by_same_director($1)
-      show_by_director_path(movie)
+      then by_director_path(Movie.where("title =?",$1).first)
     
 
     # Add more mappings here.
