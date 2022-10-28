@@ -28,3 +28,4 @@ Then /the director of "(.*)" should be "(.*)"/ do |movie, director|
   step %{I should see "#{movie}"}
   step %{I should see "#{director}"}
 end
+

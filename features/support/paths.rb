@@ -20,6 +20,7 @@ module NavigationHelpers
       then movie_path(Movie.where("title=?",$1).first)
     when /the Similar Movies page for "(.*)"$/
       then by_director_path(Movie.where("title =?",$1).first)
+    when /the new page/ then '/movies/new'
     
 
     # Add more mappings here.
